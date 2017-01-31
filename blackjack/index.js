@@ -40,40 +40,44 @@ class Deck {
 }
 
 class Player {
-  constructor(card1, card2) {
+  constructor(card1, card2, total = 0) {
     this.card1 = card1;
     this.card2 = card2;
+    this.total = total;
   }
 }
 
 class User extends Player {
-  constructor(card1, card2) {
-    super(card1, card2);
+  constructor(card1, card2, total = 0) {
+    super(card1, card2, total);
   }
 
   flipCards() {
     console.log(`Your hand: ${this.card1.value} of ${this.card1.suit}, ${this.card2.value} of ${this.card2.suit} (total = ${this.card1.value + this.card2.value})`);
+    this.total = this.card1.value + this.card2.value;
   }
 }
 
 class Opponent extends Player {
-  constructor(card1, card2, playerNum) {
-    super(card1, card2);
+  constructor(card1, card2, total = 0, playerNum) {
+    super(card1, card2, total);
     this.playerNum = playerNum;
   }
 
   flipCards() {
     console.log(`Player ${this.playerNum}'s hand: ${this.card1.value} of ${this.card1.suit}, ${this.card2.value} of ${this.card2.suit} (total = ${this.card1.value + this.card2.value})`);
+    this.total = this.card1.value + this.card2.value;
   }
 }
 
 class Dealer extends Player {
-  constructor(card1, card2) {
-    super(card1, card2);
+  constructor(card1, card2, total = 0) {
+    super(card1, card2, total);
   }
 
   flipCards() {
     console.log(`Dealer's hand: ${this.card1.value} of ${this.card1.suit}, ${this.card2.value} of ${this.card2.suit} (total = ${this.card1.value + this.card2.value})`);
+    this.total = this.card1.value + this.card2.value;
   }
 }
 

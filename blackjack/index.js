@@ -87,17 +87,13 @@ class Blackjack {
   }
 
   play() {
-    // create new deck and shuffle it
     const newDeck = new Deck(names, suits);
     newDeck.createDeck();
     newDeck.shuffleDeck();
 
-    // instantiate players and draw cards
-    //// instantiate User
     const user = new User(newDeck.cards.shift(), newDeck.cards.shift());
     user.flipCards();
 
-    //// instantiate opponents - if there are any
     if(this.numOfPlayers > 0) {
       for(var k = 1; k <= this.numOfPlayers; k++) {
         const player = new Opponent(newDeck.cards.shift(), newDeck.cards.shift(), k);
@@ -105,7 +101,6 @@ class Blackjack {
       }
     }
 
-    //// instantiate dealer
     const dealer = new Dealer(newDeck.cards.shift(), newDeck.cards.shift());
     dealer.flipCards();
   }

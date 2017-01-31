@@ -59,7 +59,7 @@ class User extends Player {
 }
 
 class Opponent extends Player {
-  constructor(card1, card2, total = 0, playerNum) {
+  constructor(card1, card2, playerNum, total = 0) {
     super(card1, card2, total);
     this.playerNum = playerNum;
   }

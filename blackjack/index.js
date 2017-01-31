@@ -44,10 +44,6 @@ class Player {
     this.card1 = card1;
     this.card2 = card2;
   }
-
-  parseCard() {
-    console.log("hit");
-  }
 }
 
 class User extends Player {

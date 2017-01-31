@@ -59,13 +59,13 @@ class User extends Player {
 }
 
 class Opponent extends Player {
-  constructor(card1, card2, playerNum, total = 0) {
+  constructor(card1, card2, playerId, total = 0) {
     super(card1, card2, total);
-    this.playerNum = playerNum;
+    this.playerId = playerId;
   }
 
   flipCards() {
-    console.log(`Player ${this.playerNum}'s hand: ${this.card1.name} of ${this.card1.suit}, ${this.card2.name} of ${this.card2.suit} (total = ${this.card1.value + this.card2.value})`);
+    console.log(`Player ${this.playerId}'s hand: ${this.card1.name} of ${this.card1.suit}, ${this.card2.name} of ${this.card2.suit} (total = ${this.card1.value + this.card2.value})`);
     this.total = this.card1.value + this.card2.value;
   }
 }
@@ -82,8 +82,21 @@ class Dealer extends Player {
 }
 
 class Blackjack {
-  constructor(numOfPlayers) {
+  constructor(numOfPlayers, players = []) {
     this.numOfPlayers = numOfPlayers;
+    this.players = players;
+  }
+
+  declareWinner(playerArray) {
+    const winner = playerArray.reduce((previousPlayer, currentPlayer) => (previousPlayer.total > currentPlayer.total) ? previousPlayer : currentPlayer);
+
+    if(winner instanceof User) {
+      console.log('You won!');
+    } else if(winner instanceof Opponent) {
+      console.log(`Player ${winner.playerId} won!`);
+    } else if(winner instanceof Dealer) {
+      console.log('Dealer won!');
+    }
   }
 
   play() {
@@ -93,16 +106,21 @@ class Blackjack {
 
     const user = new User(newDeck.cards.shift(), newDeck.cards.shift());
     user.flipCards();
+    this.players.push(user);
 
     if(this.numOfPlayers > 0) {
       for(var k = 1; k <= this.numOfPlayers; k++) {
         const player = new Opponent(newDeck.cards.shift(), newDeck.cards.shift(), k);
         player.flipCards();
+        this.players.push(player);
       }
     }
 
     const dealer = new Dealer(newDeck.cards.shift(), newDeck.cards.shift());
     dealer.flipCards();
+    this.players.push(dealer);
+
+    this.declareWinner(this.players);
   }
 }
 

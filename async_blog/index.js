@@ -1,7 +1,6 @@
-const urlUserPosts = 'https://jsonplaceholder.typicode.com/posts?userId=1';
-const urlPosts = 'https://jsonplaceholder.typicode.com/posts';
-const urlAlbums = 'https://jsonplaceholder.typicode.com/albums';
-const urlTodos = 'https://jsonplaceholder.typicode.com/todos';
+const urlPosts = 'https://jsonplaceholder.typicode.com/posts?userId=1';
+const urlAlbums = 'https://jsonplaceholder.typicode.com/albums?userId=1';
+const urlTodos = 'https://jsonplaceholder.typicode.com/todos?userId=1';
 
 let numOfUserPosts = 0;
 let numOfUserAlbums = 0;
@@ -21,14 +20,8 @@ function fetchPosts() {
       return response.json();
     })
     .then(function(posts) {
-      posts.forEach(function(post) {
-        if(post.userId === 1) {
-          numOfUserPosts++;
-        }
-      });
-
+      numOfUserPosts = posts.length;
       fetchTodos();
-
     })
     .catch(function(error) {
       console.log('Request failed: ' + error);
@@ -41,14 +34,8 @@ function fetchTodos() {
       return response.json();
     })
     .then(function(todos) {
-      todos.forEach(function(todo) {
-        if(todo.userId === 1) {
-          numOfUserTodos++;
-        }
-      });
-
+      numOfUserTodos = todos.length;
       fetchAlbums();
-
     })
     .catch(function(error) {
       console.log('Request failed: ' + error);
@@ -61,14 +48,8 @@ function fetchAlbums() {
       return response.json();
     })
     .then(function(albums) {
-      albums.forEach(function(album) {
-        if(album.userId === 1) {
-          numOfUserAlbums++;
-        }
-      });
-
+      numOfUserAlbums = albums.length;
       userDesc(numOfUserPosts, numOfUserAlbums, numOfUserTodos)
-      
     })
     .catch(function(error) {
       console.log('Request failed: ' + error);

@@ -1,3 +1,4 @@
+// Declare variables
 const urlPosts = 'https://jsonplaceholder.typicode.com/posts?userId=1';
 const urlAlbums = 'https://jsonplaceholder.typicode.com/albums?userId=1';
 const urlTodos = 'https://jsonplaceholder.typicode.com/todos?userId=1';
@@ -12,6 +13,7 @@ let numOfUserTodos;
 let userPosts;
 let userPostComments;
 
+// Initialize/configure fetch params
 const initFetchGet = {
   method: 'GET'
 };
@@ -21,6 +23,7 @@ const initFetchPost = {
   body: JSON.stringify(comment)
 };
 
+// Declare logging functions
 function logUserDesc(numPosts, numAlbums, numTodos) {
   console.log('Bret has ' + numPosts + ' posts, ' + numAlbums + ' albums, and ' + numTodos + ' todos');
 }
@@ -39,6 +42,7 @@ function logCreateCommentSuccess(comment) {
   console.log('You commented "' + comment + '"' );
 }
 
+// Declare fetch functions
 function fetchPosts() {
   fetch(urlPosts, initFetchGet)
     .then(function(response) {
@@ -106,7 +110,7 @@ function createComment() {
     });
 }
 
-// Init
+// Init script
 fetchPosts();
 setTimeout(fetchPostComments, 2000);
 setTimeout(createComment, 4000);

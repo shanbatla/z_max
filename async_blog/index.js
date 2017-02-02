@@ -16,13 +16,9 @@ function logUserDesc(numPosts, numAlbums, numTodos) {
 }
 
 function logUserPosts(posts) {
-  posts.forEach(function(post, index) {
-    if((index + 1) <= 5) {
-      console.log('Post ' + (index + 1) + ': ' + post.title);
-    } else {
-      return;
-    }
-  });
+  for(var i = 0; i <= 4; i++) {
+    console.log('Post ' + (i + 1) + ': ' + posts[i].title);
+  }
 }
 
 function fetchPosts() {

@@ -15,51 +15,64 @@ function userDesc(posts, albums, todos) {
   console.log('Bret has ' + posts + ' posts, ' + albums + ' albums, and ' + todos + ' todos');
 }
 
-fetch(urlPosts, initFetchGet)
-  .then(function(response) {
-    return response.json()
-  })
-  .then(function(posts) {
-    posts.forEach(function(post) {
-      if(post.userId === 1) {
-        numOfUserPosts++;
-      }
-    });
-
-    fetch(urlAlbums, initFetchGet)
-      .then(function(response) {
-        return response.json()
-      })
-      .then(function(albums) {
-        albums.forEach(function(album) {
-          if(album.userId === 1) {
-            numOfUserAlbums++;
-          }
-        });
-
-        fetch(urlTodos, initFetchGet)
-          .then(function(response) {
-            return response.json()
-          })
-          .then(function(todos) {
-            todos.forEach(function(todo) {
-              if(todo.userId === 1) {
-                numOfUserTodos++;
-              }
-            });
-
-            userDesc(numOfUserPosts, numOfUserAlbums, numOfUserTodos)
-          })
-          .catch(function(error) {
-            console.log('Request failed: ' + error);
-          });
-
-      })
-      .catch(function(error) {
-        console.log('Request failed: ' + error);
+function fetchPosts() {
+  fetch(urlPosts, initFetchGet)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(posts) {
+      posts.forEach(function(post) {
+        if(post.userId === 1) {
+          numOfUserPosts++;
+        }
       });
 
-  })
-  .catch(function(error) {
-    console.log('Request failed: ' + error);
-  });
+      fetchTodos();
+
+    })
+    .catch(function(error) {
+      console.log('Request failed: ' + error);
+    });
+}
+
+function fetchTodos() {
+  fetch(urlTodos, initFetchGet)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(todos) {
+      todos.forEach(function(todo) {
+        if(todo.userId === 1) {
+          numOfUserTodos++;
+        }
+      });
+
+      fetchAlbums();
+
+    })
+    .catch(function(error) {
+      console.log('Request failed: ' + error);
+    });
+}
+
+function fetchAlbums() {
+   fetch(urlAlbums, initFetchGet)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(albums) {
+      albums.forEach(function(album) {
+        if(album.userId === 1) {
+          numOfUserAlbums++;
+        }
+      });
+
+      userDesc(numOfUserPosts, numOfUserAlbums, numOfUserTodos)
+      
+    })
+    .catch(function(error) {
+      console.log('Request failed: ' + error);
+    });
+}
+
+fetchPosts();

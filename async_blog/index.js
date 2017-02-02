@@ -21,11 +21,25 @@ function fetchPosts() {
     })
     .then(function(posts) {
       numOfUserPosts = posts.length;
-      fetchTodos();
+      fetchAlbums();
     })
     .catch(function(error) {
       console.log('Request failed: ' + error);
     });
+}
+
+function fetchAlbums() {
+  fetch(urlAlbums, initFetchGet)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(albums) {
+    numOfUserAlbums = albums.length;
+    fetchTodos();
+  })
+  .catch(function(error) {
+    console.log('Request failed: ' + error);
+  });
 }
 
 function fetchTodos() {
@@ -35,25 +49,12 @@ function fetchTodos() {
     })
     .then(function(todos) {
       numOfUserTodos = todos.length;
-      fetchAlbums();
+      userDesc(numOfUserPosts, numOfUserAlbums, numOfUserTodos);
     })
     .catch(function(error) {
       console.log('Request failed: ' + error);
     });
 }
 
-function fetchAlbums() {
-   fetch(urlAlbums, initFetchGet)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(albums) {
-      numOfUserAlbums = albums.length;
-      userDesc(numOfUserPosts, numOfUserAlbums, numOfUserTodos)
-    })
-    .catch(function(error) {
-      console.log('Request failed: ' + error);
-    });
-}
 
 fetchPosts();

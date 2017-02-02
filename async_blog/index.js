@@ -2,6 +2,9 @@ const urlPosts = 'https://jsonplaceholder.typicode.com/posts?userId=1';
 const urlAlbums = 'https://jsonplaceholder.typicode.com/albums?userId=1';
 const urlTodos = 'https://jsonplaceholder.typicode.com/todos?userId=1';
 const urlPostComments = 'https://jsonplaceholder.typicode.com/comments?postId=1';
+const urlCreateComment = 'https://jsonplaceholder.typicode.com/comments?postId=1';
+
+const comment = 'Great post!';
 
 let numOfUserPosts;
 let numOfUserAlbums;
@@ -11,6 +14,11 @@ let userPostComments;
 
 const initFetchGet = {
   method: 'GET'
+};
+
+const initFetchPost = {
+  method: 'POST',
+  body: JSON.stringify(comment)
 };
 
 function logUserDesc(numPosts, numAlbums, numTodos) {
@@ -25,6 +33,10 @@ function logUserPosts(posts) {
 
 function logCommentDetails(comments) {
   console.log('Viewing "' + userPosts[4].title + '" which has ' + comments.length + ' comments');
+}
+
+function logCreateCommentSuccess(comment) {
+  console.log('You commented "' + comment + '"' );
 }
 
 function fetchPosts() {
@@ -84,6 +96,17 @@ function fetchPostComments() {
     });
 }
 
+function createComment() {
+  fetch(urlCreateComment, initFetchPost)
+    .then(function() {
+      logCreateCommentSuccess(comment);
+    })
+    .catch(function(error) {
+      console.log('Request failed: ' + error);
+    });
+}
+
 // Init
 fetchPosts();
 setTimeout(fetchPostComments, 2000);
+setTimeout(createComment, 4000);

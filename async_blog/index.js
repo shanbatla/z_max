@@ -1,11 +1,13 @@
 const urlPosts = 'https://jsonplaceholder.typicode.com/posts?userId=1';
 const urlAlbums = 'https://jsonplaceholder.typicode.com/albums?userId=1';
 const urlTodos = 'https://jsonplaceholder.typicode.com/todos?userId=1';
+const urlPostComments = 'https://jsonplaceholder.typicode.com/comments?postId=1';
 
 let numOfUserPosts;
 let numOfUserAlbums;
 let numOfUserTodos;
 let userPosts;
+let userPostComments;
 
 const initFetchGet = {
   method: 'GET'
@@ -19,6 +21,10 @@ function logUserPosts(posts) {
   for(var i = 0; i <= 4; i++) {
     console.log('Post ' + (i + 1) + ': ' + posts[i].title);
   }
+}
+
+function logCommentDetails(comments) {
+  console.log('Viewing "' + userPosts[4].title + '" which has ' + comments.length + ' comments');
 }
 
 function fetchPosts() {
@@ -65,5 +71,19 @@ function fetchTodos() {
     });
 }
 
+function fetchPostComments() {
+  fetch(urlPostComments, initFetchGet)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(postComments) {
+      logCommentDetails(postComments);
+    })
+    .catch(function(error) {
+      console.log('Request failed: ' + error);
+    });
+}
 
+// Init
 fetchPosts();
+setTimeout(fetchPostComments, 2000);

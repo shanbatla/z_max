@@ -1,5 +1,19 @@
+/**
+* Usage:
+*
+* Requires Node v6.x or higher.
+*
+* Within the terminal, navigate to the directory where this file is and run - node index.js.
+*/
+
 const assert = require('assert');
 
+/**
+* Store modules to be referenced in the future by require_2.
+* @param {string} moduleName - The name of the module.
+* @param {function} fn - The function to be stored.
+* @return {object} The object storing the modules.  Only returns if the fn param was not passed in.
+*/
 function define(moduleName, fn) {
   if(fn) {
     if(!this.modules) {
@@ -11,6 +25,11 @@ function define(moduleName, fn) {
   }
 }
 
+
+/**
+* Reference modules stored in the define function.
+* @param {string} moduleName - The name of the module.
+*/
 function require_2(moduleName) {
   if(define(moduleName)[moduleName]) {
     return define(moduleName)[moduleName];
@@ -19,6 +38,10 @@ function require_2(moduleName) {
   }
 }
 
+
+/**
+* Assertions
+*/
 define('sum', (a, b) => a + b);
 define('subtract', (a, b) => a - b);
 define('multiply', (a, b) => a * b);

@@ -1,3 +1,9 @@
+/**
+* Usage:
+*
+* Load index.html (located in the same directory as this file) into a browser and open the console.  The script will execute upon load.
+*/
+
 // Declare variables
 const urlPosts = 'https://jsonplaceholder.typicode.com/posts?userId=1';
 const urlAlbums = 'https://jsonplaceholder.typicode.com/albums?userId=1';

@@ -53,8 +53,8 @@ class User extends Player {
   }
 
   flipCards() {
-    console.log(`Your hand: ${this.card1.name} of ${this.card1.suit}, ${this.card2.name} of ${this.card2.suit} (total = ${this.card1.value + this.card2.value})`);
     this.total = this.card1.value + this.card2.value;
+    console.log(`Your hand: ${this.card1.name} of ${this.card1.suit}, ${this.card2.name} of ${this.card2.suit} (total = ${this.total})`);
   }
 }
 
@@ -65,8 +65,8 @@ class Opponent extends Player {
   }
 
   flipCards() {
-    console.log(`Player ${this.playerId}'s hand: ${this.card1.name} of ${this.card1.suit}, ${this.card2.name} of ${this.card2.suit} (total = ${this.card1.value + this.card2.value})`);
     this.total = this.card1.value + this.card2.value;
+    console.log(`Player ${this.playerId}'s hand: ${this.card1.name} of ${this.card1.suit}, ${this.card2.name} of ${this.card2.suit} (total = ${this.total})`);
   }
 }
 
@@ -76,8 +76,8 @@ class Dealer extends Player {
   }
 
   flipCards() {
-    console.log(`Dealer's hand: ${this.card1.name} of ${this.card1.suit}, ${this.card2.name} of ${this.card2.suit} (total = ${this.card1.value + this.card2.value})`);
     this.total = this.card1.value + this.card2.value;
+    console.log(`Dealer's hand: ${this.card1.name} of ${this.card1.suit}, ${this.card2.name} of ${this.card2.suit} (total = ${this.total})`);
   }
 }
 

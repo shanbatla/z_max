@@ -4,8 +4,8 @@ const suits = ['Hearts','Diamonds','Spades','Clubs'];
 class Card {
   constructor(value, name, suit) {
     this.value = value;
-  	this.name = name;
-  	this.suit = suit;
+    this.name = name;
+    this.suit = suit;
   }
 }
 
@@ -88,14 +88,30 @@ class Blackjack {
   }
 
   declareWinner(playerArray) {
-    const winner = playerArray.reduce((previousPlayer, currentPlayer) => (previousPlayer.total > currentPlayer.total) ? previousPlayer : currentPlayer);
+    let winner;
+    let hiScore = 0;
+    let scores = [];
 
-    if(winner instanceof User) {
-      console.log('You won!');
-    } else if(winner instanceof Opponent) {
-      console.log(`Player ${winner.playerId} won!`);
-    } else if(winner instanceof Dealer) {
-      console.log('Dealer won!');
+    playerArray.forEach(function(player) {
+      if(player.total > hiScore) {
+        hiScore = player.total;
+        winner = player;
+      }
+      scores.push(player.total);
+    });
+
+    scores.sort((a, b) => b - a);
+
+    if(scores[0] === scores[1]) {
+      console.log('Its a tie! Play again!');
+    } else {
+      if(winner instanceof User) {
+        console.log('You won!');
+      } else if(winner instanceof Opponent) {
+        console.log(`Player ${winner.playerId} won!`);
+      } else if(winner instanceof Dealer) {
+        console.log('Dealer won!');
+      }
     }
   }
 
@@ -125,5 +141,5 @@ class Blackjack {
 }
 
 
-let newGame = new Blackjack(2);
+let newGame = new Blackjack(4);
 newGame.play();
